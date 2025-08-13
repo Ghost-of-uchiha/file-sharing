@@ -181,7 +181,7 @@ if "verify" in query_params:
             if verify_file_otp(file_id, entered_otp):
                 st.success("✅ OTP verified! You can now download the file.")
                 # Since this is local, we show a download link directly
-                st.page_link(f"?download={file_id}", label="➡️ Go to Download Page", icon="➡️")
+                st.markdown(f'<a href="?download={file_id}" target="_self">➡️ Go to Download Page</a>', unsafe_allow_html=True)
             else:
                 st.error("❌ Invalid OTP. Please try again.")
     st.stop()
@@ -309,7 +309,7 @@ elif page == "📥 My Downloads":
                 with st.expander(f"📄 {file_data.get('original_filename', 'N/A')} from {file_data.get('uploader')}"):
                     st.write(f"**From:** {file_data.get('uploader')}")
                     st.write(f"**Expiry:** {file_data.get('expiry_hours')} hours")
-                    st.page_link(f"?verify={file_data['id']}", label="➡️ Go to Download Page", icon="➡️")
+                    st.markdown(f'<a href="?verify={file_data["id"]}" target="_self">➡️ Go to Download Page</a>', unsafe_allow_html=True)
     else:
         st.info("📭 You have not received any files yet.")
 else:
